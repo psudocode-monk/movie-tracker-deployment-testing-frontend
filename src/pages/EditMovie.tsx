@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import { 
   FaFilm, 
   FaUserTie, 
@@ -17,7 +17,7 @@ import {
   FaSpinner 
 } from "react-icons/fa";
 
-const containerVariants = {
+const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
@@ -28,7 +28,7 @@ const containerVariants = {
   },
 };
 
-const itemVariants = {
+const itemVariants: Variants = {
   hidden: { opacity: 0, y: 20, scale: 0.95 },
   visible: {
     opacity: 1,
@@ -38,7 +38,7 @@ const itemVariants = {
   },
 };
 
-const buttonVariants = {
+const buttonVariants: Variants = {
   hover: {
     scale: 1.02,
     boxShadow: "0 10px 25px rgba(16, 185, 129, 0.3)",
@@ -55,7 +55,6 @@ export default function EditMovie() {
   const [error, setError] = useState<string | null>(null);
   const [updating, setUpdating] = useState(false);
 
-  // Fetch movie details by ID
   useEffect(() => {
     const fetchMovie = async () => {
       try {
@@ -77,7 +76,6 @@ export default function EditMovie() {
     if (id) fetchMovie();
   }, [id]);
 
-  // Update movie
   const handleUpdate = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!movie) return;
@@ -98,7 +96,6 @@ export default function EditMovie() {
     }
   };
 
-  // Controlled input change
   const handleChange = (field: string, value: string | number) => {
     setMovie((prev: any) => ({ ...prev, [field]: value }));
   };
@@ -164,26 +161,22 @@ export default function EditMovie() {
       animate={{ opacity: 1 }}
       className="min-h-screen flex items-center justify-center bg-gradient-to-br from-black via-gray-900 to-black text-white relative overflow-hidden"
     >
-      {/* Subtle Background Pattern */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_50%,rgba(16,185,129,0.1),transparent_50%)] animate-pulse" />
       </div>
 
-      {/* Main Container */}
       <motion.div
         variants={containerVariants}
         initial="hidden"
         animate="visible"
         className="w-full max-w-xl p-4 md:p-10 relative z-10"
       >
-        {/* Form Card */}
         <motion.div
           initial={{ scale: 0.95, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ duration: 0.5 }}
           className="bg-black/60 backdrop-blur-md rounded-2xl shadow-2xl border border-emerald-400/30 p-6 md:p-10 space-y-6"
         >
-          {/* Header */}
           <motion.div variants={itemVariants} className="text-center space-y-4">
             <motion.div
               whileHover={{ scale: 1.1, rotate: 5 }}
@@ -209,7 +202,6 @@ export default function EditMovie() {
             </motion.p>
           </motion.div>
 
-          {/* Form */}
           <motion.form onSubmit={handleUpdate} variants={containerVariants} className="space-y-4">
             {[
               { key: "title", label: "Movie Title", icon: FaFilm, type: "text" },
@@ -220,7 +212,7 @@ export default function EditMovie() {
               { key: "yearOrTime", label: "Year / Time (e.g., 2023)", icon: FaCalendar, type: "text" },
               { key: "genre", label: "Genre (e.g., Action)", icon: FaTag, type: "text" },
               { key: "rating", label: "Rating (0-10)", icon: FaStar, type: "number", min: 0, max: 10 },
-            ].map(({ key, label, icon: Icon, type, min, max }, index) => (
+            ].map(({ key, label, icon: Icon, type, min, max }) => (
               <motion.div
                 key={key}
                 variants={itemVariants}
@@ -246,7 +238,6 @@ export default function EditMovie() {
               </motion.div>
             ))}
 
-            {/* Description Textarea */}
             <motion.div
               variants={itemVariants}
               whileHover={{ scale: 1.02 }}
@@ -262,7 +253,6 @@ export default function EditMovie() {
               />
             </motion.div>
 
-            {/* Error Message */}
             {error && (
               <motion.p
                 initial={{ opacity: 0, y: 10 }}
@@ -273,7 +263,6 @@ export default function EditMovie() {
               </motion.p>
             )}
 
-            {/* Submit Button */}
             <motion.button
               variants={itemVariants}
               whileHover={buttonVariants.hover}
@@ -298,7 +287,6 @@ export default function EditMovie() {
             </motion.button>
           </motion.form>
 
-          {/* Cancel Button */}
           <motion.button
             whileHover={buttonVariants.hover}
             whileTap={buttonVariants.tap}
