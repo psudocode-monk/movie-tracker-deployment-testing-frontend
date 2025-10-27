@@ -35,7 +35,7 @@ export default function CreateMovie() {
 
     try {
       await axios.post(
-        "http://localhost:8000/api/create-movies",
+        "https://movie-tracker-app-sepia.vercel.app/api/create-movies",
         {
           title,
           director,

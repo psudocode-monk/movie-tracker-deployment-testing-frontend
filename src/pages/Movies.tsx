@@ -10,7 +10,7 @@ export default function Movies() {
   // Fetch current user
   const fetchUser = async () => {
     try {
-      const res = await axios.get("http://localhost:8000/api/get-user", {
+      const res = await axios.get("https://movie-tracker-app-sepia.vercel.app/api/get-user", {
         withCredentials: true,
       });
       setUser(res.data.user);
@@ -27,7 +27,7 @@ export default function Movies() {
 
   const handleLogout = async () => {
     try {
-      await axios.get("http://localhost:8000/api/logout", {
+      await axios.get("https://movie-tracker-app-sepia.vercel.app/api/logout", {
         withCredentials: true,
       });
       navigate("/login");

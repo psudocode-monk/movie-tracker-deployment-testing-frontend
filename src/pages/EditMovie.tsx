@@ -61,7 +61,7 @@ export default function EditMovie() {
     const fetchMovie = async () => {
       try {
         const res = await axios.get(
-          `http://localhost:8000/api/get-movie/${id}`,
+          `https://movie-tracker-app-sepia.vercel.app/api/get-movie/${id}`,
           { withCredentials: true }
         );
         setMovie(res.data);
@@ -85,7 +85,7 @@ export default function EditMovie() {
     try {
       setUpdating(true);
       await axios.put(
-        `http://localhost:8000/api/update-movie/${movie._id}`,
+        `https://movie-tracker-app-sepia.vercel.app/api/update-movie/${movie._id}`,
         movie,
         { withCredentials: true }
       );

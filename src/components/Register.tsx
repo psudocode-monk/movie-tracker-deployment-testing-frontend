@@ -18,7 +18,7 @@ export default function Register() {
 
     try {
       const res = await axios.post(
-        "http://localhost:8000/api/register",
+        "https://movie-tracker-app-sepia.vercel.app/api/register",
         { name, email, password },
         { withCredentials: true }
       );
