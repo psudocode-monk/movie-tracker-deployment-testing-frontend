@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom"
-import { motion, Variants } from "framer-motion"
+import { motion, type Variants } from "framer-motion"
 import { FaHome, FaFilm, FaExclamationTriangle } from "react-icons/fa"
 
 const containerVariants: Variants = {
@@ -34,16 +34,17 @@ const digitContainerVariants: Variants = {
   },
 }
 
+// ✅ FIX: explicitly type custom parameter as number
 const digitVariants: Variants = {
   hidden: { opacity: 0, y: 30, scale: 0.8 },
-  visible: (custom: number = 0) => ({
+  visible: (custom?: number) => ({
     opacity: 1,
     y: 0,
     scale: 1,
     transition: {
       duration: 0.5,
       ease: "easeOut",
-      delay: custom * 0.1,
+      delay: (custom ?? 0) * 0.1,
     },
   }),
 }

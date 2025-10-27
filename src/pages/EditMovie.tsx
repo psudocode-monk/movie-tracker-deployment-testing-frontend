@@ -1,22 +1,23 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
-import { motion, Variants } from "framer-motion";
-import { 
-  FaFilm, 
-  FaUserTie, 
-  FaDollarSign, 
-  FaMapMarkerAlt, 
-  FaClock, 
-  FaCalendar, 
-  FaTag, 
-  FaStar, 
-  FaAlignLeft, 
+import { motion, type Variants } from "framer-motion";
+import {
+  FaFilm,
+  FaUserTie,
+  FaDollarSign,
+  FaMapMarkerAlt,
+  FaClock,
+  FaCalendar,
+  FaTag,
+  FaStar,
+  FaAlignLeft,
   FaEdit,
   FaArrowLeft,
-  FaSpinner 
+  FaSpinner,
 } from "react-icons/fa";
 
+// ✅ FIXED: typed as Variants explicitly and safely
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
@@ -38,7 +39,8 @@ const itemVariants: Variants = {
   },
 };
 
-const buttonVariants: Variants = {
+// ✅ FIX: `buttonVariants` must not be Variants type; use Record<string, any>
+const buttonVariants: Record<string, any> = {
   hover: {
     scale: 1.02,
     boxShadow: "0 10px 25px rgba(16, 185, 129, 0.3)",
@@ -202,16 +204,62 @@ export default function EditMovie() {
             </motion.p>
           </motion.div>
 
-          <motion.form onSubmit={handleUpdate} variants={containerVariants} className="space-y-4">
+          <motion.form
+            onSubmit={handleUpdate}
+            variants={containerVariants}
+            className="space-y-4"
+          >
             {[
-              { key: "title", label: "Movie Title", icon: FaFilm, type: "text" },
-              { key: "director", label: "Director", icon: FaUserTie, type: "text" },
-              { key: "budget", label: "Budget", icon: FaDollarSign, type: "number" },
-              { key: "location", label: "Location", icon: FaMapMarkerAlt, type: "text" },
-              { key: "duration", label: "Duration (e.g., 2h 30m)", icon: FaClock, type: "text" },
-              { key: "yearOrTime", label: "Year / Time (e.g., 2023)", icon: FaCalendar, type: "text" },
-              { key: "genre", label: "Genre (e.g., Action)", icon: FaTag, type: "text" },
-              { key: "rating", label: "Rating (0-10)", icon: FaStar, type: "number", min: 0, max: 10 },
+              {
+                key: "title",
+                label: "Movie Title",
+                icon: FaFilm,
+                type: "text",
+              },
+              {
+                key: "director",
+                label: "Director",
+                icon: FaUserTie,
+                type: "text",
+              },
+              {
+                key: "budget",
+                label: "Budget",
+                icon: FaDollarSign,
+                type: "number",
+              },
+              {
+                key: "location",
+                label: "Location",
+                icon: FaMapMarkerAlt,
+                type: "text",
+              },
+              {
+                key: "duration",
+                label: "Duration (e.g., 2h 30m)",
+                icon: FaClock,
+                type: "text",
+              },
+              {
+                key: "yearOrTime",
+                label: "Year / Time (e.g., 2023)",
+                icon: FaCalendar,
+                type: "text",
+              },
+              {
+                key: "genre",
+                label: "Genre (e.g., Action)",
+                icon: FaTag,
+                type: "text",
+              },
+              {
+                key: "rating",
+                label: "Rating (0-10)",
+                icon: FaStar,
+                type: "number",
+                min: 0,
+                max: 10,
+              },
             ].map(({ key, label, icon: Icon, type, min, max }) => (
               <motion.div
                 key={key}
@@ -219,7 +267,10 @@ export default function EditMovie() {
                 whileHover={{ scale: 1.02 }}
                 className="relative"
               >
-                <Icon className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={18} />
+                <Icon
+                  className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+                  size={18}
+                />
                 <input
                   type={type}
                   placeholder={label}
@@ -228,7 +279,9 @@ export default function EditMovie() {
                   onChange={(e) =>
                     handleChange(
                       key,
-                      type === "number" ? Number(e.target.value) : e.target.value
+                      type === "number"
+                        ? Number(e.target.value)
+                        : e.target.value
                     )
                   }
                   min={min}
@@ -243,7 +296,10 @@ export default function EditMovie() {
               whileHover={{ scale: 1.02 }}
               className="relative"
             >
-              <FaAlignLeft className="absolute left-3 top-3 text-gray-400" size={18} />
+              <FaAlignLeft
+                className="absolute left-3 top-3 text-gray-400"
+                size={18}
+              />
               <textarea
                 placeholder="Description (optional)"
                 className="w-full pl-10 pr-4 py-3 pt-8 bg-black/50 backdrop-blur-md border border-white/30 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-400/50 focus:border-emerald-400 transition-all duration-200 resize-none"
@@ -275,7 +331,11 @@ export default function EditMovie() {
                 <div className="flex items-center justify-center gap-2">
                   <motion.div
                     animate={{ rotate: 360 }}
-                    transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                    transition={{
+                      duration: 1,
+                      repeat: Infinity,
+                      ease: "linear",
+                    }}
                   >
                     <FaSpinner className="text-black" size={18} />
                   </motion.div>
