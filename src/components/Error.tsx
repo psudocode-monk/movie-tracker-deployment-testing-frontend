@@ -1,8 +1,8 @@
-import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
-import { FaHome, FaFilm, FaExclamationTriangle } from "react-icons/fa";
+import { Link } from "react-router-dom"
+import { motion, Variants } from "framer-motion"
+import { FaHome, FaFilm, FaExclamationTriangle } from "react-icons/fa"
 
-const containerVariants = {
+const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
@@ -11,19 +11,19 @@ const containerVariants = {
       delayChildren: 0.1,
     },
   },
-};
+}
 
-const itemVariants = {
+const itemVariants: Variants = {
   hidden: { opacity: 0, y: 50, scale: 0.9 },
   visible: {
     opacity: 1,
     y: 0,
     scale: 1,
-    transition: { duration: 0.6, ease: "easeOut" },
+    transition: { duration: 0.6, ease: [0.43, 0.13, 0.23, 0.96] },
   },
-};
+}
 
-const digitContainerVariants = {
+const digitContainerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
@@ -32,38 +32,38 @@ const digitContainerVariants = {
       delayChildren: 0.4,
     },
   },
-};
+}
 
-const digitVariants = {
+const digitVariants: Variants = {
   hidden: { opacity: 0, y: 30, scale: 0.8 },
-  visible: (custom) => ({
+  visible: (custom: number = 0) => ({
     opacity: 1,
     y: 0,
     scale: 1,
-    transition: { 
-      duration: 0.5, 
+    transition: {
+      duration: 0.5,
       ease: "easeOut",
-      delay: custom * 0.1 
+      delay: custom * 0.1,
     },
   }),
-};
+}
 
-const blobVariants = {
+const blobVariants: Variants = {
   hidden: { scale: 0, opacity: 0 },
   visible: {
     scale: 1,
     opacity: 0.2,
-    transition: { duration: 1, ease: "easeOut" },
+    transition: { duration: 1, ease: "easeInOut" },
   },
-};
+}
 
-const buttonVariants = {
+const buttonVariants: Record<string, any> = {
   hover: {
     scale: 1.05,
     boxShadow: "0 10px 30px rgba(16, 185, 129, 0.3)",
-    transition: { duration: 0.3, yoyo: Infinity, repeat: 1 },
+    transition: { duration: 0.3, repeat: 1, repeatType: "reverse" },
   },
-};
+}
 
 export default function Error() {
   return (
@@ -159,15 +159,14 @@ export default function Error() {
 
         {/* Go Home Button */}
         <motion.div variants={itemVariants}>
-          <Link
-            to="/"
-            className="inline-flex items-center gap-2 bg-gradient-to-r from-emerald-500 to-emerald-600 text-black font-bold px-8 py-4 rounded-2xl transition-all duration-300 shadow-lg hover:shadow-emerald-500/50 transform hover:-translate-y-1"
+          <motion.div
             whileHover={buttonVariants.hover}
             whileTap={{ scale: 0.95 }}
+            className="inline-flex items-center gap-2 bg-gradient-to-r from-emerald-500 to-emerald-600 text-black font-bold px-8 py-4 rounded-2xl transition-all duration-300 shadow-lg hover:shadow-emerald-500/50 transform hover:-translate-y-1"
           >
             <FaHome size={18} />
-            Go Home
-          </Link>
+            <Link to="/">Go Home</Link>
+          </motion.div>
         </motion.div>
       </motion.div>
 
@@ -196,5 +195,5 @@ export default function Error() {
         ))}
       </div>
     </div>
-  );
+  )
 }
