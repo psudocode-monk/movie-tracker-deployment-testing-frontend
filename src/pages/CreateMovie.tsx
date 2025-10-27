@@ -35,7 +35,7 @@ export default function CreateMovie() {
 
     try {
       await axios.post(
-        "https://movie-tracker-deployment-testing-ba.vercel.app//api/create-movies",
+        "https://movie-tracker-deployment-testing-ba.vercel.app/api/create-movies",
         {
           title,
           director,
