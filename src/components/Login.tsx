@@ -17,7 +17,7 @@ export default function Login() {
 
     try {
       const res = await axios.post(
-        "https://movie-tracker-app-sepia.vercel.app/api/login",
+        "https://movie-tracker-deployment-testing-ba.vercel.app/api/login",
         { email, password },
         { withCredentials: true }
       );

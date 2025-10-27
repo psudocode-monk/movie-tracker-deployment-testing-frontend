@@ -37,7 +37,7 @@ export default function ShowMovies() {
 
   const fetchUser = async () => {
     try {
-      const res = await axios.get("https://movie-tracker-app-sepia.vercel.app/api/get-user", {
+      const res = await axios.get("https://movie-tracker-deployment-testing-ba.vercel.app/api/get-user", {
         withCredentials: true,
       });
       setUser(res.data.user);
@@ -48,7 +48,7 @@ export default function ShowMovies() {
 
   const fetchMovies = async () => {
     try {
-      const res = await axios.get("https://movie-tracker-app-sepia.vercel.app/api/get-movies", {
+      const res = await axios.get("https://movie-tracker-deployment-testing-ba.vercel.app/api/get-movies", {
         withCredentials: true,
       });
       setMovies(res.data);
@@ -64,7 +64,7 @@ export default function ShowMovies() {
   const handleDelete = async (id: string) => {
     setDeleting(id);
     try {
-      await axios.delete(`https://movie-tracker-app-sepia.vercel.app/api/delete-movies/${id}`, {
+      await axios.delete(`https://movie-tracker-deployment-testing-ba.vercel.app/api/delete-movies/${id}`, {
         withCredentials: true,
       });
       setMovies((prev) => prev.filter((movie) => movie._id !== id));
